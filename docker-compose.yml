@@ -26,7 +26,7 @@ services:
       POSTGRES_USER: temporal
     image: postgres:${POSTGRESQL_VERSION}
     networks:
-      - temporal-network
+      - dokploy-network
     expose:
       - 5432
     volumes:
@@ -50,7 +50,7 @@ services:
       - TEMPORAL_CLI_ADDRESS=temporal:7233
     image: temporalio/auto-setup:${TEMPORAL_VERSION}
     networks:
-      - temporal-network
+      - dokploy-network
     ports:
       - 7233:7233
     volumes:
@@ -64,7 +64,7 @@ services:
       - TEMPORAL_CLI_ADDRESS=temporal:7233
     image: temporalio/admin-tools:${TEMPORAL_ADMINTOOLS_VERSION}
     networks:
-      - temporal-network
+      - dokploy-network
     stdin_open: true
     tty: true
   temporal-ui:
@@ -76,14 +76,14 @@ services:
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
     image: temporalio/ui:${TEMPORAL_UI_VERSION}
     networks:
-      - temporal-network
+      - dokploy-network
     ports:
       - 8080:8080
 
 # networks:
-#   temporal-network:
+#   dokploy-network:
 #     driver: bridge
-#     name: temporal-network
+#     name: dokploy-network
 
 networks:
   dokploy-network:
